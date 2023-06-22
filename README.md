@@ -13,10 +13,10 @@ Include Javascript
 
 ## How to use
 ```
-const galleryFull = document.getElementById('galleryFull');
+const gallery = document.getElementById('galleryFull');
 
 inlineGallery(
-  galleryFull,
+  gallery,
   [
     {
       image: 'assets/placeholder1.jpg',
