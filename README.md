@@ -1,5 +1,4 @@
-# inline-gallery
-Inline gallery carousel
+# Inline gallery carousel
 
 ## Getting started
 Include CSS
@@ -16,30 +15,28 @@ Include Javascript
 ```
 const galleryFull = document.getElementById('galleryFull');
 
-if (galleryFull) {
-  inlineGallery(
-    galleryFull,
-    [
-      {
-        image: 'assets/placeholder1.jpg',
-        thumbnail: 'assets/placeholder1.jpg',
-      },
-      {
-        image: 'assets/placeholder2.jpg',
-        thumbnail: 'assets/placeholder2.jpg',
-        caption: 'Caption only',
-      },
-      {
-        image: 'assets/placeholder3.jpg',
-        thumbnail: 'assets/placeholder3.jpg',
-        caption: 'Caption',
-        description: 'And also some description here',
-      }
-    ],
+inlineGallery(
+  galleryFull,
+  [
     {
-      showImageCount: true,
-      allowDrag: true,
+      image: 'assets/placeholder1.jpg',
+      thumbnail: 'assets/placeholder1.jpg',
+    },
+    {
+      image: 'assets/placeholder2.jpg',
+      thumbnail: 'assets/placeholder2.jpg',
+      caption: 'Caption only',
+    },
+    {
+      image: 'assets/placeholder3.jpg',
+      thumbnail: 'assets/placeholder3.jpg',
+      caption: 'Caption',
+      description: 'And also some description here',
     }
-  );
-}
+  ],
+  {
+    showImageCount: true,
+    allowDrag: true,
+  }
+);
 ```
