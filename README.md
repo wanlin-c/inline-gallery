@@ -13,7 +13,7 @@ Include Javascript
 
 ## How to use
 ```
-const gallery = document.getElementById('galleryFull');
+const gallery = document.getElementById('gallery');
 
 inlineGallery(
   gallery,
