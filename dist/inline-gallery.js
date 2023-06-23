@@ -59,6 +59,11 @@ var inlineGallery = function (container, items, options) {
                 thumbnail.addEventListener('click', function () {
                     return gotoSlide('jump', imageList_1, thumbnailList_1, imageHolder_1, thumbnailHolder_1, totalImages_1, size_1, slide_1, currentImageCount_1, thumbnail);
                 });
+                thumbnail.addEventListener('keyup', function (e) {
+                    if (e.key === 'Enter' || e.code === 'Enter') {
+                        gotoSlide('jump', imageList_1, thumbnailList_1, imageHolder_1, thumbnailHolder_1, totalImages_1, size_1, slide_1, currentImageCount_1, thumbnail);
+                    }
+                });
             }
             // Create container that holds caption and description
             if (items[i].caption || items[i].description) {

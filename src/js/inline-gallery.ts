@@ -156,6 +156,22 @@ const inlineGallery = (
             thumbnail
           )
         );
+        thumbnail.addEventListener('keyup', (e) => {
+          if (e.key === 'Enter' || e.code === 'Enter') {
+            gotoSlide(
+              'jump',
+              imageList,
+              thumbnailList,
+              imageHolder,
+              thumbnailHolder,
+              totalImages,
+              size,
+              slide,
+              currentImageCount,
+              thumbnail
+            );
+          }
+        });
       }
       // Create container that holds caption and description
       if (items[i].caption || items[i].description) {
