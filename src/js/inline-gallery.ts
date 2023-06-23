@@ -321,11 +321,13 @@ const createArrow = (type: 'back' | 'next'): HTMLButtonElement => {
 
   arrow.classList.add(`arrow-${type === 'back' ? 'back' : 'next'}`);
   arrow.setAttribute('type', 'button');
+  arrow.setAttribute('aria-label', type)
 
   arrowIcon.setAttribute('width', '16');
   arrowIcon.setAttribute('height', '16');
   arrowIcon.setAttribute('fill', 'currentColor');
   arrowIcon.setAttribute('viewBox', '0 0 16 16');
+  arrowIcon.setAttribute('aria-hidden', 'true');
 
   arrowIconPath.setAttribute('fill-rule', 'evenodd');
   arrowIconPath.setAttribute(
@@ -474,12 +476,17 @@ const createImage = (
   image.setAttribute('data-index', `${index}`);
   if (index === activeSlide) {
     image.setAttribute('data-active', 'true');
+
+    if (type === 'thumbnail') {
+      image.setAttribute('aria-current', 'true');
+    }
   }
   if (type === 'image' && allowDrag === true) {
     image.setAttribute('draggable', 'true');
   }
   if (type === 'thumbnail') {
     image.setAttribute('role', `button`);
+    image.setAttribute('aria-label', `slide ${index !== undefined && index + 1}`);
   }
   const updatedImage = updateImage(image, imageWidth, imageHeight);
   return updatedImage;
@@ -506,13 +513,12 @@ const createInnerImage = (
   caption?: string,
   description?: string
 ): HTMLImageElement => {
-  let altText = ' ';
+  let altText = ``;
 
-  if (caption || caption && description) {
-    altText = caption;
-  }
-  if (description) {
-    altText = description;
+  if (description || caption && description) {
+    altText = `${altText} - ${description}`;
+  } else if (caption) {
+    altText = `${altText} - ${caption}`;
   }
   const imageImg = document.createElement('img');
   imageImg.setAttribute('src', src);
@@ -747,6 +753,7 @@ const gotoSlide = (
   // Deactivate current active image and thumbnail
   imageList[slide.activeSlide].removeAttribute('data-active');
   thumbnailList[slide.activeSlide].removeAttribute('data-active');
+  thumbnailList[slide.activeSlide].removeAttribute('aria-current');
 
   // Update slide index
   switch (direction) {
@@ -781,6 +788,7 @@ const gotoSlide = (
 
   // Set new active thumbnail
   thumbnailList[slide.activeSlide].setAttribute('data-active', 'true');
+  thumbnailList[slide.activeSlide].setAttribute('aria-current', 'true');
   thumbnailHolder.scroll({
     top: 0,
     left: slide.thumbnailScrolled,

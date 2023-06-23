@@ -158,10 +158,12 @@ var createArrow = function (type) {
     var arrowIconPath = document.createElementNS('http://www.w3.org/2000/svg', 'path');
     arrow.classList.add("arrow-".concat(type === 'back' ? 'back' : 'next'));
     arrow.setAttribute('type', 'button');
+    arrow.setAttribute('aria-label', type);
     arrowIcon.setAttribute('width', '16');
     arrowIcon.setAttribute('height', '16');
     arrowIcon.setAttribute('fill', 'currentColor');
     arrowIcon.setAttribute('viewBox', '0 0 16 16');
+    arrowIcon.setAttribute('aria-hidden', 'true');
     arrowIconPath.setAttribute('fill-rule', 'evenodd');
     arrowIconPath.setAttribute('d', "".concat(type === 'back'
         ? 'M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z'
@@ -264,12 +266,16 @@ var createImage = function (type, index, imageWidth, imageHeight, activeSlide, a
     image.setAttribute('data-index', "".concat(index));
     if (index === activeSlide) {
         image.setAttribute('data-active', 'true');
+        if (type === 'thumbnail') {
+            image.setAttribute('aria-current', 'true');
+        }
     }
     if (type === 'image' && allowDrag === true) {
         image.setAttribute('draggable', 'true');
     }
     if (type === 'thumbnail') {
         image.setAttribute('role', "button");
+        image.setAttribute('aria-label', "slide ".concat(index !== undefined && index + 1));
     }
     var updatedImage = updateImage(image, imageWidth, imageHeight);
     return updatedImage;
@@ -284,12 +290,12 @@ var updateImage = function (image, imageWidth, imageHeight) {
 };
 // Set size of original image <img> inside image
 var createInnerImage = function (src, containerWidth, containerHeight, caption, description) {
-    var altText = ' ';
-    if (caption || caption && description) {
-        altText = caption;
+    var altText = "";
+    if (description || caption && description) {
+        altText = "".concat(altText, " - ").concat(description);
     }
-    if (description) {
-        altText = description;
+    else if (caption) {
+        altText = "".concat(altText, " - ").concat(caption);
     }
     var imageImg = document.createElement('img');
     imageImg.setAttribute('src', src);
@@ -471,6 +477,7 @@ var gotoSlide = function (direction, imageList, thumbnailList, imageHolder, thum
     // Deactivate current active image and thumbnail
     imageList[slide.activeSlide].removeAttribute('data-active');
     thumbnailList[slide.activeSlide].removeAttribute('data-active');
+    thumbnailList[slide.activeSlide].removeAttribute('aria-current');
     // Update slide index
     switch (direction) {
         case 'back':
@@ -500,6 +507,7 @@ var gotoSlide = function (direction, imageList, thumbnailList, imageHolder, thum
     });
     // Set new active thumbnail
     thumbnailList[slide.activeSlide].setAttribute('data-active', 'true');
+    thumbnailList[slide.activeSlide].setAttribute('aria-current', 'true');
     thumbnailHolder.scroll({
         top: 0,
         left: slide.thumbnailScrolled,
