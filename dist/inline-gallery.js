@@ -1,4 +1,5 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 /* ==================================================
    Main function
 ================================================== */
@@ -49,11 +50,11 @@ var inlineGallery = function (container, items, options) {
         var _loop_1 = function (i) {
             // Create image
             var image = createImage('image', i, size_1.imageWidth, size_1.imageHeight, slide_1.activeSlide, options.allowDrag);
-            var imageImg = createInnerImage(items[i].image, size_1.imageWidth, size_1.imageHeight);
+            var imageImg = createInnerImage(items[i].image, size_1.imageWidth, size_1.imageHeight, items[i].caption, items[i].description);
             image.append(imageImg);
             // Create thumbnail
             var thumbnail = createImage('thumbnail', i, size_1.thumbnailWidth, size_1.thumbnailHeight, slide_1.activeSlide, options.allowDrag);
-            var thumbnailImg = createInnerImage(items[i].thumbnail ? items[i].thumbnail : items[i].image, size_1.thumbnailWidth, size_1.thumbnailHeight);
+            var thumbnailImg = createInnerImage(items[i].thumbnail ? items[i].thumbnail : items[i].image, size_1.thumbnailWidth, size_1.thumbnailHeight, items[i].caption, items[i].description);
             thumbnail.append(thumbnailImg);
             if (totalImages_1 > 1) {
                 thumbnail.addEventListener('click', function () {
@@ -137,6 +138,7 @@ var inlineGallery = function (container, items, options) {
         }
     }
 };
+exports.default = inlineGallery;
 /* ==================================================
    Arrows
 ================================================== */
@@ -281,9 +283,17 @@ var updateImage = function (image, imageWidth, imageHeight) {
     return image;
 };
 // Set size of original image <img> inside image
-var createInnerImage = function (src, containerWidth, containerHeight) {
+var createInnerImage = function (src, containerWidth, containerHeight, caption, description) {
+    var altText = ' ';
+    if (caption || caption && description) {
+        altText = caption;
+    }
+    if (description) {
+        altText = description;
+    }
     var imageImg = document.createElement('img');
     imageImg.setAttribute('src', src);
+    imageImg.setAttribute('alt', "".concat(altText));
     imageImg.setAttribute('draggable', 'false');
     var updatedImageImg = updateInnerImage(imageImg, containerWidth, containerHeight);
     return updatedImageImg;

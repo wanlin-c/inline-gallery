@@ -117,7 +117,9 @@ const inlineGallery = (
       const imageImg = createInnerImage(
         items[i].image,
         size.imageWidth,
-        size.imageHeight
+        size.imageHeight,
+        items[i].caption,
+        items[i].description
       );
       image.append(imageImg);
 
@@ -133,7 +135,9 @@ const inlineGallery = (
       const thumbnailImg = createInnerImage(
         items[i].thumbnail ? items[i].thumbnail : items[i].image,
         size.thumbnailWidth,
-        size.thumbnailHeight
+        size.thumbnailHeight,
+        items[i].caption,
+        items[i].description
       );
       thumbnail.append(thumbnailImg);
 
@@ -278,6 +282,8 @@ const inlineGallery = (
     }
   }
 };
+
+export default inlineGallery;
 
 /* ==================================================
    Arrows
@@ -496,10 +502,21 @@ const updateImage = (
 const createInnerImage = (
   src: string,
   containerWidth: number,
-  containerHeight: number
+  containerHeight: number,
+  caption?: string,
+  description?: string
 ): HTMLImageElement => {
+  let altText = ' ';
+
+  if (caption || caption && description) {
+    altText = caption;
+  }
+  if (description) {
+    altText = description;
+  }
   const imageImg = document.createElement('img');
   imageImg.setAttribute('src', src);
+  imageImg.setAttribute('alt', `${altText}`);
   imageImg.setAttribute('draggable', 'false');
   const updatedImageImg = updateInnerImage(
     imageImg,

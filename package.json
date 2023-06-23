@@ -6,10 +6,14 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "tsc": "npx tsc --watch",
-    "sass": "sass --no-source-map --style=expanded --watch src/styles:dist"
+    "sass": "sass --no-source-map --style=expanded --watch src/styles:dist",
+    "postcss": "npx postcss dist/inline-gallery.css --no-map --use autoprefixer --replace"
   },
   "license": "ISC",
   "devDependencies": {
+    "autoprefixer": "^10.4.14",
+    "postcss": "^8.4.24",
+    "postcss-cli": "^10.1.0",
     "sass": "^1.63.5",
     "typescript": "^5.1.3"
   }
