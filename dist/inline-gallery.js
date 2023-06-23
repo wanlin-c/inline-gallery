@@ -1,5 +1,4 @@
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
 /* ==================================================
    Main function
 ================================================== */
@@ -138,7 +137,6 @@ var inlineGallery = function (container, items, options) {
         }
     }
 };
-exports.default = inlineGallery;
 /* ==================================================
    Arrows
 ================================================== */
