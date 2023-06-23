@@ -514,9 +514,9 @@ const createInnerImage = (
   let altText = ``;
 
   if (description || caption && description) {
-    altText = `${altText} - ${description}`;
+    altText = `${description}`;
   } else if (caption) {
-    altText = `${altText} - ${caption}`;
+    altText = `${caption}`;
   }
   const imageImg = document.createElement('img');
   imageImg.setAttribute('src', src);

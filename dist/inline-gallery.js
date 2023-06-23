@@ -290,10 +290,10 @@ var updateImage = function (image, imageWidth, imageHeight) {
 var createInnerImage = function (src, containerWidth, containerHeight, caption, description) {
     var altText = "";
     if (description || caption && description) {
-        altText = "".concat(altText, " - ").concat(description);
+        altText = "".concat(description);
     }
     else if (caption) {
-        altText = "".concat(altText, " - ").concat(caption);
+        altText = "".concat(caption);
     }
     var imageImg = document.createElement('img');
     imageImg.setAttribute('src', src);
