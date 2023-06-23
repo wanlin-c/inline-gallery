@@ -45,9 +45,10 @@
 .inline-gallery .arrow-next svg {
   fill: currentcolor;
 }
-.inline-gallery .arrow-back:active, .inline-gallery .arrow-back:hover,
+.inline-gallery .arrow-back:active, .inline-gallery .arrow-back:hover, .inline-gallery .arrow-back:focus,
 .inline-gallery .arrow-next:active,
-.inline-gallery .arrow-next:hover {
+.inline-gallery .arrow-next:hover,
+.inline-gallery .arrow-next:focus {
   opacity: 1;
 }
 .inline-gallery .image-holder-wrapper {
@@ -73,24 +74,6 @@
   border-radius: 1rem;
   overflow: hidden;
   padding: 0;
-}
-.inline-gallery .image-holder.transition-next, .inline-gallery .image-holder.transition-prev {
-  transition: left 0.4s linear;
-}
-.inline-gallery .image-holder.transition-prev {
-  left: 0;
-}
-.inline-gallery .image-holder.transition-prev .item-image.old-active {
-  order: 2;
-}
-.inline-gallery .image-holder.transition-prev .item-image[data-active=true] {
-  order: 1;
-}
-.inline-gallery .image-holder.transition-prev .item-image.prev {
-  display: none;
-}
-.inline-gallery .image-holder.transition-prev .item-image.next {
-  order: 3;
 }
 .inline-gallery .image-holder + .thumbnail-holder {
   margin-top: 0.25rem;
@@ -149,10 +132,7 @@
   border: 0.0625rem solid #fff;
   box-shadow: 0 0 0.0625rem 0.0625rem #000;
 }
-.inline-gallery .item-thumbnail[data-active=true]::after {
-  opacity: 0;
-}
-.inline-gallery .item-thumbnail:hover::after {
+.inline-gallery .item-thumbnail:hover::after, .inline-gallery .item-thumbnail:active::after, .inline-gallery .item-thumbnail:focus::after, .inline-gallery .item-thumbnail[data-active=true]::after {
   opacity: 0;
 }
 .inline-gallery .item-thumbnail + .item-thumbnail {

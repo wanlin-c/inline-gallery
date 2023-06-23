@@ -18,7 +18,7 @@ const inlineGallery = (
   items: Array<inlineGalleryItems>,
   options: inlineGalleryOptions = {
     showImageCount: false,
-    allowDrag: true
+    allowDrag: true,
   }
 ) => {
   // Only runs the code if main container exists
@@ -319,7 +319,8 @@ const createArrow = (type: 'back' | 'next'): HTMLButtonElement => {
 
   arrow.classList.add(`arrow-${type === 'back' ? 'back' : 'next'}`);
   arrow.setAttribute('type', 'button');
-  arrow.setAttribute('aria-label', type)
+  arrow.setAttribute('aria-label', type);
+  arrow.setAttribute('tabindex', '0');
 
   arrowIcon.setAttribute('width', '16');
   arrowIcon.setAttribute('height', '16');
@@ -484,7 +485,11 @@ const createImage = (
   }
   if (type === 'thumbnail') {
     image.setAttribute('role', `button`);
-    image.setAttribute('aria-label', `slide ${index !== undefined && index + 1}`);
+    image.setAttribute(
+      'aria-label',
+      `slide ${index !== undefined && index + 1}`
+    );
+    image.setAttribute('tabindex', '0');
   }
   const updatedImage = updateImage(image, imageWidth, imageHeight);
   return updatedImage;
@@ -513,7 +518,7 @@ const createInnerImage = (
 ): HTMLImageElement => {
   let altText = ``;
 
-  if (description || caption && description) {
+  if (description || (caption && description)) {
     altText = `${description}`;
   } else if (caption) {
     altText = `${caption}`;

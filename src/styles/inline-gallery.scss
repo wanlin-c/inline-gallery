@@ -47,7 +47,8 @@ $image-border-radius: 1rem;
       fill: currentcolor;
     }
     &:active,
-    &:hover {
+    &:hover,
+    &:focus {
       opacity: 1;
     }
   }
@@ -75,28 +76,6 @@ $image-border-radius: 1rem;
     overflow: hidden;
     padding: 0;
 
-    &.transition-next,
-    &.transition-prev {
-      transition: left 0.4s linear;
-    }
-    &.transition-prev {
-      left: 0;
-
-      .item-image {
-        &.old-active {
-          order: 2;
-        }
-        &[data-active=true] {
-          order: 1;
-        }
-        &.prev {
-          display: none;
-        }
-        &.next {
-          order: 3;
-        }
-      }
-    }
     + .thumbnail-holder {
       margin-top: 0.25rem;
 
@@ -156,12 +135,11 @@ $image-border-radius: 1rem;
     &[data-active=true] {
       border: 0.0625rem solid #fff;
       box-shadow: 0 0 0.0625rem 0.0625rem #000;
-
-      &::after { 
-        opacity: 0;
-      }
     }
-    &:hover {
+    &:hover,
+    &:active,
+    &:focus,
+    &[data-active=true] {
       &::after {
         opacity: 0;
       }

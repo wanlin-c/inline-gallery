@@ -5,7 +5,7 @@
 var inlineGallery = function (container, items, options) {
     if (options === void 0) { options = {
         showImageCount: false,
-        allowDrag: true
+        allowDrag: true,
     }; }
     // Only runs the code if main container exists
     if (container) {
@@ -157,6 +157,7 @@ var createArrow = function (type) {
     arrow.classList.add("arrow-".concat(type === 'back' ? 'back' : 'next'));
     arrow.setAttribute('type', 'button');
     arrow.setAttribute('aria-label', type);
+    arrow.setAttribute('tabindex', '0');
     arrowIcon.setAttribute('width', '16');
     arrowIcon.setAttribute('height', '16');
     arrowIcon.setAttribute('fill', 'currentColor');
@@ -274,6 +275,7 @@ var createImage = function (type, index, imageWidth, imageHeight, activeSlide, a
     if (type === 'thumbnail') {
         image.setAttribute('role', "button");
         image.setAttribute('aria-label', "slide ".concat(index !== undefined && index + 1));
+        image.setAttribute('tabindex', '0');
     }
     var updatedImage = updateImage(image, imageWidth, imageHeight);
     return updatedImage;
@@ -289,7 +291,7 @@ var updateImage = function (image, imageWidth, imageHeight) {
 // Set size of original image <img> inside image
 var createInnerImage = function (src, containerWidth, containerHeight, caption, description) {
     var altText = "";
-    if (description || caption && description) {
+    if (description || (caption && description)) {
         altText = "".concat(description);
     }
     else if (caption) {
